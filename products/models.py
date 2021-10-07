@@ -23,7 +23,7 @@ class ProductDetails(models.Model):
 class Product(models.Model):
     objects = ProductManager()
     name = models.CharField(max_length=200)
-    category = models.CharField(max_length=24)
+    category = models.CharField(max_length=100)
     imageUrl = models.URLField(max_length=200)
     rating = models.IntegerField(default=0)
     details = models.ForeignKey(
