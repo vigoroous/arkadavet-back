@@ -1,17 +1,31 @@
-from .models import Product, ProductDetails
+from .models import Category, Product, Details
 from rest_framework import viewsets
 from rest_framework import permissions
-from products.serializers import ProductSerializer, ProductDetailsSerializer
+from django_filters.rest_framework import DjangoFilterBackend
+from products.serializers import ProductSerializer, CategorySerializer, DetailsSerializer, ProductFullSerializer
 
 
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['category']
 
 
-class ProductDetailsViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = ProductDetails.objects.all()
-    serializer_class = ProductDetailsSerializer
+class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
     permission_classes = [permissions.AllowAny]
-    # permission_classes = [permissions.IsAuthenticated]
+
+
+class DetailsViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Details.objects.all()
+    serializer_class = DetailsSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class ProductFullViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductFullSerializer
+    permission_classes = [permissions.AllowAny]

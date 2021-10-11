@@ -1,10 +1,19 @@
 from rest_framework import serializers
-from .models import Product, ProductDetails
+from .models import Category, Details, Product
 
 
-class ProductDetailsSerializer(serializers.HyperlinkedModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = ProductDetails
+        model = Category
+        fields = [
+            'id',
+            'name',
+        ]
+
+
+class DetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Details
         fields = [
             'id',
             'description',
@@ -15,9 +24,23 @@ class ProductDetailsSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class ProductSerializer(serializers.HyperlinkedModelSerializer):
-    # details = ProductDetailsSerializer(many = False, read_only = True)
-    details = serializers.PrimaryKeyRelatedField(many = False, read_only = True)
+class ProductSerializer(serializers.ModelSerializer):
+    category = CategorySerializer(many = False, read_only = True)
+    class Meta:
+        model = Product
+        fields = [
+            'id',
+            'objects',
+            'name',
+            'category',
+            'imageUrl',
+            'rating',
+        ]
+
+
+class ProductFullSerializer(serializers.ModelSerializer):
+    category = CategorySerializer(many = False, read_only = True)
+    details = DetailsSerializer(many = False, read_only = True)
     class Meta:
         model = Product
         fields = [

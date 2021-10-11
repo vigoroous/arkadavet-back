@@ -20,8 +20,10 @@ from products import views
 
 
 router = routers.DefaultRouter()
-router.register(r'products', views.ProductViewSet)
-router.register(r'productdetails', views.ProductDetailsViewSet)
+router.register(r'product', views.ProductViewSet, 'products/product')
+router.register(r'category', views.CategoryViewSet)
+router.register(r'details', views.DetailsViewSet)
+router.register(r'productfull', views.ProductFullViewSet)
 
 
 urlpatterns = [
