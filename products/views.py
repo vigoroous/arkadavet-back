@@ -1,3 +1,4 @@
+from rest_framework.filters import OrderingFilter
 from .models import Category, Product, Details
 from rest_framework import viewsets
 from rest_framework import permissions
@@ -9,8 +10,9 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_fields = ['category']
+    ordering_fields = ['name', 'category', 'rating']
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
