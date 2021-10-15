@@ -19,15 +19,14 @@ from rest_framework import routers
 from products import views
 
 
-router = routers.DefaultRouter()
-router.register(r'product', views.ProductViewSet, 'products/product')
-router.register(r'category', views.CategoryViewSet)
-router.register(r'details', views.DetailsViewSet)
-router.register(r'productfull', views.ProductFullViewSet)
-
+router_products = routers.DefaultRouter()
+router_products.register(r'base', views.ProductViewSet, basename='product-base')
+router_products.register(r'category', views.CategoryViewSet, basename='product-category')
+router_products.register(r'details', views.DetailsViewSet, basename='product-details')
+router_products.register(r'full', views.ProductFullViewSet, basename='product-full')
+router_products.register(r'form', views.FormViewSet, basename='product-form')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
-    # path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('products/', include(router_products.urls))
 ]
