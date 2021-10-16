@@ -38,7 +38,7 @@ SECRET_KEY = env('SECRET_KEY') or 'uj2^c^8vzn*k%kb#zj+q$c=p^4q)up@rlr2+q33lcx#7s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1']
+ALLOWED_HOSTS = ['api.arkadavet.ru', 'localhost', '127.0.0.1']
 
 
 # Application definition
